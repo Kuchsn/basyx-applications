@@ -1,15 +1,31 @@
-# Build Stage
-FROM node:lts-alpine as build-stage
+# Base stage
+FROM node:lts-alpine as base
 # Set working directory
 WORKDIR /app
 # Copy the package.json and yarn.lock files
 COPY package.json yarn.lock ./
 # Install dependencies
 RUN yarn install
+
+# Build Stage
+FROM base as build-stage
 # Copy project files
+COPY package.json yarn.lock ./
 COPY . .
 # Build the application
 RUN yarn build
+
+# Development Stage
+FROM base as development-stage
+# Copy project files
+COPY package.json yarn.lock ./
+COPY . .
+# Install development dependencies
+RUN yarn install
+# Expose the development server port
+EXPOSE 3000
+# Start the development server
+CMD ["yarn", "dev"]
 
 # Production Stage
 FROM nginx:alpine as production-stage

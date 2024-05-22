@@ -76,3 +76,4 @@ fi
 
 # Start Nginx
 exec nginx -g 'daemon off;'
+# exec yarn dev

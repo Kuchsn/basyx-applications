@@ -158,6 +158,7 @@ export default defineComponent({
                     try {
                         // request submodels from the retrieved AAS (top layer of the Treeview)
                         let submodelData = await this.requestSubmodels(response.data.result);
+                        // console.log('Submodel Data: ', submodelData);
                         // set the isActive prop of the initialNode if it exists and the initialUpdate flag is set
                         if(this.initialUpdate && this.initialNode) {
                             let expandedSubmodelData = this.expandTree(submodelData, this.initialNode); // Update the Treeview to expand until the initially set node is reached
