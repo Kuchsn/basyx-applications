@@ -318,6 +318,7 @@ export default defineComponent({
 
         // to check if the MainWindow is the current Route
         showAASList() {
+            // console.log(this.$route.name)
             return ['MainWindow', 'AASViewer'].includes(this.$route.name as string);
         },
 

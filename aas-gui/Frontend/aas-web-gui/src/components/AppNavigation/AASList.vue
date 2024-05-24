@@ -18,8 +18,9 @@
                         </v-tooltip>
                     </v-col>
                     <!-- AAS Search Field -->
+                    
                     <v-col class="pl-1 pr-0" v-if="showExtended">
-                        <v-text-field variant="outlined" density="compact" hide-details label="Search for AAS..." clearable @update:modelValue="filterAASList"></v-text-field>
+                        <v-text-field variant="outlined" density="compact" hide-details label="Search for AAS..." clearable @update:modelValue="schunkFilter"></v-text-field>
                     </v-col>
                     <!-- Add existing AAS -->
                     <v-col cols="auto" class="px-0" v-if="showExtended">
@@ -338,7 +339,18 @@ export default defineComponent({
 
         // Function to filter the AAS List
         filterAASList(value: string) {
-            // console.log('Filter AAS List: ', value);
+            // if the Search Field is empty, show all AAS
+            if(value === '' || value === null) {
+                this.AASData = this.unfilteredAASData;
+            } else {
+                // filter the AAS List by the Search Field Value
+                let filteredAASData = this.unfilteredAASData.filter((AAS: { [x: string]: string; }) => AAS['idShort'].toLowerCase().includes(value.toLowerCase()));
+                this.AASData = filteredAASData;
+            }
+        },
+
+        schunkFilter(value: string) {
+            console.log('Filter AAS List: ', this.unfilteredAASData, value);
             // if the Search Field is empty, show all AAS
             if(value === '' || value === null) {
                 this.AASData = this.unfilteredAASData;

@@ -5,6 +5,7 @@
             <!-- SubmodelList Component -->
             <div class="pa-0 window" style="width: 350px; min-width: 350px">
                 <SubmodelList />
+                
             </div>
             <!-- Divider between SubmodelList and SubmodelVisualization -->
             <div style="position: relative; height: calc(100vh - 106px); z-index: 1">
